@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from .task import test_func
+# from .task import test_func
+from .task import send_desktop_notifications
 from django.http import HttpResponse
+
 
 # Create your views here.
 def test(request):
-    test_func.delay()
-    return HttpResponse("Done") 
+    # test_func.delay()
+    send_desktop_notifications.delay()
+    return HttpResponse("Done")
