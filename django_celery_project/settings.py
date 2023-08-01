@@ -31,12 +31,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # declaring app which has functionality of websockets and channels
+    'daphne',
+    'chat',
+
+    # default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # declaring app which has functionality of celery
     'mainapp',  
     'django_celery_results',
     'django_celery_beat'
@@ -135,3 +142,15 @@ CELERY_RESULT_BACKEND = 'django-db'
 
 # Celery Beat Settings
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+# Daphne Settings
+# Channels
+ASGI_APPLICATION = "django_celery_project.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
