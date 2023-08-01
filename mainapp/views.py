@@ -4,5 +4,4 @@ from django.http import HttpResponse
 # Create your views here.
 def test(request):
     test_func.delay()
-    # test_func()
     return HttpResponse("Done") 
